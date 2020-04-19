@@ -1,0 +1,40 @@
+header {
+    z-index: 10;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    height: $header-height;
+    padding: 1rem;
+
+    #logo {
+        display: inline-block;
+        img {
+            height: 50px;
+        }
+    }
+
+    .link {
+        margin: 0 0.8rem;
+        color: #333;
+        font-size: 1.2rem;
+    }
+
+    @if $direction == 'rtl' {
+        .logout-icon {
+            transform: rotate(180deg);
+        }
+    } 
+    
+    #header-sidebar-toggle-btn {
+        vertical-align: middle;
+
+        @include responsive((
+            0: (
+                display: inline-block,
+            ),
+            $tablet-width: (
+                display: none,
+            ),
+        ));
+    }
+}

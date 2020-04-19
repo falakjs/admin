@@ -1,0 +1,17 @@
+body {
+    
+    #content {
+        padding: 1rem;
+    }
+
+    &.desktop {
+        main {
+            padding-#{$left}: #{$sidebar-width};
+        }
+    }
+
+    &.mobile {
+        #content {
+        }
+    }
+}

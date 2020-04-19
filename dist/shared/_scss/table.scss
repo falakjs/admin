@@ -1,0 +1,13 @@
+.table {
+    &.bold {
+        th {
+            font-weight: bold !important;
+        }
+    }
+
+    &.table-btn {
+        td {
+            vertical-align: middle;
+        }
+    }
+}

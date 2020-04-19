@@ -1,0 +1,39 @@
+<aside *as="element">
+    <div id="sidebar-overlay" (click)="this.toggle()"></div>
+    <button type="button" id="sidebar-close-btn" (click)="this.toggle()" title="close">
+        <fa icon="times"></fa>
+    </button>
+    <div id="sidebar-content" *as="sidebarContent">
+        <section class="user">
+            <img *if="this.user.image" [src]="this.user.image" [alt]="this.user.name" />
+            <fa *else icon="user-secret"></fa>
+            <span class="name" [html]="this.user.name"></span>
+            <fa icon="circle online"></fa>
+        </section>
+        <ul id="sidebar-tree">
+            <li *for="let link of this.links" class="item" [class]="{'tree-parent': link.group}">
+                <a *if="! link.group" [href]="link.route" [class]="{active: link.route == this.currentRoute}">
+                    <fa [icon]="link.icon"></fa>
+                    <span [trans]="link.text"></span>
+                </a>
+                <else>
+                    <a href="#" (click)="this.toggleTree(link)" [class]="{active: link.opened}" (ready)="link.parent">
+                        <fa [icon]="link.group.icon"></fa>
+                        <span [trans]="link.group.text"></span>
+                        <fa (ready)="link.dropdownIconElement = $el" [icon]="link.dropdownIcon || this.dropdownIcon"
+                            class="dropdown-icon"></fa>
+                    </a>
+                    <ul class="tree" [class]="{opened: link.opened}" (ready)="link.tree = $el">
+                        <li *for="let subLink of link.items" class="item">
+                            <a *if="! subLink.group" [href]="subLink.route"
+                                [class]="{active: subLink.route == this.currentRoute}">
+                                <fa [icon]="subLink.icon"></fa>
+                                <span [trans]="subLink.text"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </else>
+            </li>
+        </ul>
+    </div>
+</aside>

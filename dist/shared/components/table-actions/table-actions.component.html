@@ -1,0 +1,18 @@
+<button 
+    *if="this.parent.can('update', record, index)"
+    class="btn btn-info btn-circle btn-sm waves-effect waves-light" 
+    tooltip
+    title="{{ trans('editItem', trans(this.options.singleName)) }}"
+    (click)="this.parent.openModal('edit', record, index)"
+    >
+    <fa icon="edit" 2x></fa>
+</button>
+<button 
+    *if="this.parent.can('delete', record, index)"
+    class="btn btn-danger btn-circle btn-sm waves-effect waves-light" 
+    tooltip
+    title="{{ trans('deleteItem', trans(this.options.singleName)) }}"
+    (click)="this.confirmDelete(record, index)"
+    >
+    <fa icon="trash" 2x></fa>
+</button>

@@ -1,0 +1,17 @@
+.table-pagination {
+    .pagination-column {
+        max-width: 400px;
+        overflow: auto;
+    }
+    nav {
+        padding-top: 1rem;
+        // max-width: 100px;
+
+        .pagination .page-item.active .page-link:hover,
+        .pagination .page-item.active .page-link {
+            background-color: #444;
+            box-shadow: 0px 0px 4px 2px #ccc;
+        }
+
+    }
+}

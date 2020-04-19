@@ -1,0 +1,7 @@
+<flk-modal *as="modal" (close)="this.close()"
+    heading="{{ trans(this.heading, trans(this.itemName)) }}">
+    <form (submit)="this.submit($el)">
+        FORM_INPUTS        
+        <form-buttons></form-buttons>
+    </form>
+</flk-modal>

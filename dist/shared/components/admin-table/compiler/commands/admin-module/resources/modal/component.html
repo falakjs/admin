@@ -1,0 +1,22 @@
+<flk-modal *as="modal" [dismissible]="false" (close)="this.close()"
+    heading="{{ trans(this.heading, trans(this.itemName)) }}">
+    <form (submit)="this.submit($el)">
+        <input type="hidden" name="slug" [value]="this.data.slug" />
+        <form-input type="text" name="name" (input,change)="this.data.slug = seo($el.value)" label="name"
+            [value]="this.data.name" required class="form-control">
+        </form-input>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="image" trans="image"></label>
+                    <flk-image-input [src]="this.data.image" name="image" [required]="true"></flk-image-input>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <form-status></form-status>
+            </div>
+        </div>
+        <form-buttons></form-buttons>
+    </form>
+</flk-modal>

@@ -1,0 +1,23 @@
+<header>
+    <div id="logo">
+        <a [href]="BASE_URL" target="_blank">
+            <img *if="Config.get('admin.logo')" [src]="assets(Config.get('admin.logo'))" [alt]="trans('site-name')" />
+            <strong *if="Config.get('admin.logoText')" [html]="Config.get('admin.logoText')"></strong>            
+        </a>
+    </div>
+    <button type="button" id="header-sidebar-toggle-btn" (click)="this.sidebar.toggle();" title="openSidebar">
+        <fa icon="bars" 2x></fa>
+    </button>
+    <a href="/settings" class="link">
+        <fa icon="cog" spin tooltip [title]="trans('settings')"></fa>
+    </a>
+    <a href="/" class="link">
+        <fa icon="tachometer-alt" tooltip [title]="trans('dashboard')"></fa>
+    </a>
+    <a [href]="BASE_URL" class="link" target="_blank">
+        <fa icon="globe" tooltip [title]="trans('website')"></fa>
+    </a>
+    <a href="#" class="link" (click)="this.logout()">
+        <fa icon="sign-out-alt logout-icon" tooltip [title]="trans('logout')"></fa>
+    </a>
+</header>

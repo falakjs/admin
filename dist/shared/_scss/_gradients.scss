@@ -1,0 +1,14 @@
+@mixin gradient($class, $gradient, $foreground: #FFF) {
+    .#{$class}-gradient {
+        background: $gradient;
+        color: $foreground;
+
+        &:hover {
+            color: $foreground;
+        }
+    }
+}
+
+@include gradient(danger, linear-gradient(40deg, #ff7878, #881616));
+@include gradient(success, linear-gradient(40deg, #78fff3, #167888));
+@include gradient(pink, linear-gradient(40deg, #ff7897, #881616));

@@ -1,0 +1,26 @@
+// main
+$primary-color: skyblue;
+$body-background-color: #F5F5F5 !default;
+$body-color: #000 !default;
+
+// sidebar
+// $sidebar-background: #353b48;
+// $sidebar-background-dark: #2f3640;
+// $sidebar-tree-background: #49505d;
+
+$sidebar-background-color: #2b2e33;
+$sidebar-sub-menu-background-color: #181a1d;
+$sidebar-link-color: #94989d;
+$sidebar-active-link-color: #FFF;
+
+$header-height-only: 70;
+$header-height: #{$header-height-only}px;
+
+$sidebar-width-only: 250;
+$sidebar-width: #{$sidebar-width-only}px;
+
+$percentage: '%';
+$sidebar-mobile-width-only: 75;
+$sidebar-mobile-width: #{$sidebar-mobile-width-only}#{$percentage};
+
+$tablet-width: 780;

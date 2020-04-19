@@ -1,0 +1,47 @@
+{
+    "name": "@flk/admin",
+    "description": "Admin Dashboard For Falak JS",
+    "version": "1.1.24",
+    "license": "ISC",
+    "author": {
+        "email": "hassanzohdy@gmail.com",
+        "name": "Hasan Zohdy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/falakjs/flk-admin"
+    },
+    "dependencies": {
+        "pretty": "^2.0.0",
+        "pretty-js": "^0.2.1",
+        "pluralize": "^8.0.0",
+        "express": "^4.17.1",
+        "multer": "^1.4.2",        
+        "@flk/autocomplete-input": "^1.3.*",
+        "@flk/seo": "^0.1.*",
+        "@flk/message": "^0.3.*",
+        "@flk/image-input": "^1.3.*",
+        "@flk/datepicker": "^1.3.*",
+        "@flk/ckeditor": "^1.3.*",
+        "@flk/meta": "^1.3.*",
+        "@flk/form": "^1.3.*",
+        "@flk/random": "^0.1.*",
+        "@flk/mdbootstrap": "^1.3.*",        
+        "@flk/scss": "^1.3.*",
+        "@flk/fa": "^5.7.*",
+        "@flk/spinner": "^1.3.*",
+        "@flk/tooltip": "^1.3.*",
+        "@flk/dropdown-list": "^1.3.*",
+        "@flk/time-ago": "^1.3.*",
+        "@flk/modal": "^1.3.*",
+        "@flk/alert": "^1.3.*",
+        "@flk/mdb-checkbox": "^1.3.*"
+    },
+    "mainFiles": {
+        "pluralize": null,
+        "pretty": null,
+        "pretty-js": null,
+        "express": null,
+        "multer": null
+    }
+}

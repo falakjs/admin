@@ -1,0 +1,7 @@
+.flk-mdb-checkbox .custom-control-label {
+    padding-top: 0.5rem;
+}
+
+.flk-mdb-checkbox .custom-control-label::before, .flk-mdb-checkbox .custom-control-label::after {
+    left: -3rem;
+}

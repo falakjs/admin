@@ -1,0 +1,37 @@
+// import your app files instead of writing code directly here!
+@import 'variables'; 
+@import 'gradients';
+@import 'buttons';
+@import 'flk-alert';
+@import 'dropdown';
+@import 'card-item';
+@import 'general';
+@import 'table';
+@import 'form';
+
+// special variable
+// $direction: rtl|ltr >> the current direction of the application
+// $right: `right` on ltr and `left` or rtl
+// $left: `left` on ltr and `right` or rtl
+
+$primary-font: '' !default;
+
+@if $direction == ltr {
+    // 
+    @import url(https://fonts.googleapis.com/css?family=Raleway);
+    $primary-font: Raleway;
+} @else {
+    // 
+    @import url(https://fonts.googleapis.com/css?family=Cairo);
+    $primary-font: Cairo;
+}
+
+body {
+    text-align: $left;
+    font-family: $primary-font;
+    background: $body-background-color;
+}
+
+.en {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

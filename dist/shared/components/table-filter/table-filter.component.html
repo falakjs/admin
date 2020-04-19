@@ -1,0 +1,30 @@
+<div *if="Object.get(this.options.table, 'filter.options')" class="card-item m-t-2">
+    <form *as="filterForm" (submit)="this.filter($el)" id="table-filter" class="row mx-0 m-b-1">
+        <input type="hidden" *as="pageInput" name="page" [value]="this.page" />
+
+        <for loop="let filter of this.options.table.filter.options">
+            <div class="{{ filter.columnSize ? 'col-' + filter.columnSize : 'col' }} m-b-1">
+                <form-input *if="filter.type == 'search'" type="text" [name]="filter.param" class="form-control" [placeholder]="filter.text"></form-input>
+                <flk-datepicker *if="filter.type == 'date'" [name]="filter.param" class="form-control" [placeholder]="filter.text"></flk-datepicker>
+                <flk-dropdown-list 
+                    *if="filter.type == 'dropdown' && filter.items"
+                    [placeholder]="filter.text"
+                    [heading]="filter.text"
+                    [none]="filter.none"
+                    [name]="filter.param"
+                    [items]="Is.function(filter.items) ? filter.items() : filter.items"
+                    [remote-search]="filter.remoteSearch"
+                    [lazy-loading]="filter.endpoint"
+                    [query]="filter.query || 'query'"
+                    [endpoint]="filter.endpoint ? '/admin' + filter.endpoint : null"
+                    [multiple]="filter.multiple"
+                ></flk-dropdown-list>
+            </div>
+        </for>
+    
+        <div class="col filter-btns">
+            <button class="btn btn-sm btn-blue bold m-t-0" [disabled]="this.isFiltering" trans="filter"></button>
+            <button class="btn btn-sm btn-warning bold m-t-0" [disabled]="this.isFiltering" trans="reset" (click)="this.reset($el)"></button>
+        </div>
+    </form>
+</div>

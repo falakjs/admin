@@ -35,7 +35,7 @@ DI.resolve('events').on('app.ready', () => {
     let user = DI.resolve('user');
     if (! user.isLoggedIn()) return;
     
-    if (response.user) {
+    if (response.user && response.user.id) {
         // update user group for permissions
         user.update(response.user);            
         

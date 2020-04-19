@@ -1,5 +1,5 @@
 <div class="form-buttons">
-    <button class="btn save-btn btn-success waves-effect waves-light" [disabled]="this.isSending || (! Is.undefined(this.submitForm) && ! this.submitForm)">
+    <button class="save-btn btn btn-info waves-effect waves-light" [disabled]="this.isSending || (! Is.undefined(this.submitForm) && ! this.submitForm)">
         <span *if="! this.isSending" trans="save"></span>
         <fa *else icon="spinner" spin></fa>
     </button>
@@ -8,6 +8,6 @@
         type="button" 
         (click)="this.modal.close()" 
         [disabled]="this.isSending"
-        class="btn save-btn btn-danger waves-effect waves-light" 
+        class="btn btn-outline-danger waves-effect" 
         trans="cancel"></button>
 </div>

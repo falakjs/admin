@@ -3,34 +3,14 @@ class SidebarSection {
      * Constructor
      * Put your required dependencies in the constructor parameters list  
      */
-    constructor(user, router, events, authService) {
+    constructor(user, router, events, cache, authService) {
         this.user = user;
         this.router = router;
         this.events = events;
+        this.cache = cache;
         this.authService = authService;
 
-        this.customRoutes = ADMIN.SIDEBAR_CUSTOM_ROUTES;
-
-        this.links = ADMIN.SIDEBAR_LINKS;
-
-        this.links = this.links.map(linksList => {    
-            if (ADMIN.DISABLE_PERMISSIONS === true) return linksList;        
-            if (linksList.items) {
-                linksList.items = linksList.items.filter(link => {                    
-                    return ! Is.undefined(link.permissionsKey) ? Object.get(this.user.group.permissions, link.permissionsKey) : true;
-                });
-            } else if (! Is.undefined(linksList.permissionsKey) && linksList.permissionsKey && ! Object.get(this.user.group.permissions, linksList.permissionsKey)) {
-                return false;
-            }
-
-            return linksList;
-        }).filter(linksList => {
-            if (! linksList) return false;
-
-            if (linksList.items && Is.empty(linksList.items)) return false;
-
-            return true;
-        });
+        this.keywords = '';
 
         this.dropdownIcon = `angle-${Config.get('app.direction') == 'ltr' ? 'right' : 'left'}`;
 
@@ -52,11 +32,15 @@ class SidebarSection {
     }
 
     toggle() {
-        this.jqueryElement.fadeToggle();
+        if (Is.mobile.any()) {        
+            this.jqueryElement.fadeToggle();
+        } else {
+            this.inputs.parent.toggleSidebar(); 
+        }
     }
 
     ready() {
-        if (! this.jqueryElement) {
+        if (!this.jqueryElement) {
             this.jqueryElement = $(this.element);
         }
 
@@ -72,6 +56,31 @@ class SidebarSection {
      * This method is triggered before rendering the component
      */
     init() {
+        this.customRoutes = ADMIN.SIDEBAR_CUSTOM_ROUTES;
+
+        this.links = ADMIN.SIDEBAR_LINKS;
+
+        this.links = this.links.map(linksList => {
+            if (ADMIN.DISABLE_PERMISSIONS === true) return linksList;
+            if (linksList.items) {
+                linksList.items = linksList.items.filter(link => {
+                    return !Is.undefined(link.permissionsKey) ? Object.get(this.user.group.permissions, link.permissionsKey) : true;
+                });
+            } else if (!Is.undefined(linksList.permissionsKey) && linksList.permissionsKey && !Object.get(this.user.group.permissions, linksList.permissionsKey)) {
+                return false;
+            }
+
+            return linksList;
+        }).filter(linksList => {
+            if (!linksList) return false;
+
+            if (linksList.items && Is.empty(linksList.items)) return false;
+
+            return true;
+        });
+
+        this.filter(this.keywords);
+
         this.currentRoute = this.router.route();
 
         if (this.customRoutes[this.router.current.route]) {
@@ -91,6 +100,24 @@ class SidebarSection {
                     group.dropdownIcon = this.openedDropdownIcon;
                 }
             }
+        }
+    }
+
+    filter(keywords) {
+        this.keywords = keywords;
+        if (!keywords) {
+            this.displayedLinks = this.links;
+        } else {
+            let regex = new RegExp(keywords, 'i');
+            this.displayedLinks = this.links.filter(link => {
+                let match = link.group ? trans(link.group.text).match(regex) : trans(link.text).match(regex);
+
+                if (!match && link.items) {
+                    match = link.items.find(subLink => trans(subLink.text).match(regex));
+                }
+
+                return match;
+            });
         }
     }
 }

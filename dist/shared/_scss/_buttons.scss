@@ -4,6 +4,27 @@
     padding: 0.6rem 2rem;
 }
 
-.btn-sm.btn-circle {
+.btn.btn-sm {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0;
+    margin: 10px;
+    overflow: hidden;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    display: inline-block;
     padding: 0.5rem 0.7rem !important;
+} 
+
+.btn-sm.btn-circle {
+    width: 47px;
+    height: 47px;
+    width: 36.15385px;
+    height: 36.15385px;
+    padding: 0 !important;
 }

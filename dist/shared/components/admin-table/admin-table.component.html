@@ -2,7 +2,7 @@
     <div *if="this.parent.isPermitted" id="admin-table">
         <div class="card-item">
             <button *if="this.options.addable && this.options.singleName && this.parent.can('create')" 
-                class="btn btn-success btn-sm waves-effect waves-light add-record-btn" tooltip
+                class="btn btn-teal btn-sm waves-effect waves-light add-record-btn" tooltip
                 title="{{ trans('addItem', trans(this.options.singleName)) }}" (click)="this.parent.openModal('add')">
                 <fa icon="plus"></fa>
                 <span [trans]="this.options.singleName"></span>
@@ -10,55 +10,62 @@
 
             <h1 class="table-heading" [trans]="this.options.table.heading"></h1>
         </div>   
-        <div class="table-holder">
+        <div class="table-holder m-t-2">        
             <div *if="this.tableIsLoading" class="table-loading">
                 <div class="spinner"></div> 
             </div>
             <table-filter></table-filter>
-            <div class="card-item table-responsive m-t-2">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th *for="let column of this.options.table.columns" [trans]="column.head"></th>
-                            <th *if="this.options.table.actions" trans="actions"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *if="this.isLoading">
-                            <td class="text-center" colspan="{{ this.options.table.colspan() }}">
-                                <flk-spinner></flk-spinner>
-                            </td>
-                        </tr>
-                        <else>
-                            <tr *if="Is.empty(this.records)">
-                                <td class="text-center" colspan="{{ this.options.table.colspan() }}" trans="noRecords"></td>
+            <div class="p-0">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-hover">
+                        <thead>
+                            <tr>
+                                <th *for="let column of this.options.table.columns" [trans]="column.head"></th>
+                                <th *if="this.options.table.actions" trans="actions"></th>
                             </tr>
-                            <tr *else *for="let record, index of this.records" *key="record.id">
-                                <td *for="let column of this.options.table.columns">
-                                    <a *if="column.formatter == 'email'" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="'mailto:' + Object.get(record, column.key, column.default)" [html]="Object.get(record, column.key)"></a>
-                                    <a *elseif="column.formatter == 'link'" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="column.href(record, index)" target="{{column.target || 'self'}}" [html]="Object.get(record, column.key, column.default)"></a>
-                                    <a *elseif="column.formatter == 'imageLink' && Object.get(record, column.key, column.default)" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="column.href(record)" target="{{column.target || 'self'}}">
-                                        <img class="image" class="img-rounded" [src]="Object.get(record, column.key, column.default)" />
-                                    </a>
-                                    <flk-time-ago *elseif="column.formatter == 'humanTime'" class="{{ column.className }}" [timestamp]="Object.get(record, column.key, column.default)"></flk-time-ago>
-                                    <img *elseif="column.formatter == 'image' && Object.get(record, column.key)" (click)="column.onClick && column.onClick(record, index)" class="image img-rounded {{ column.className }}" [src]="Object.get(record, column.key, column.default)" />
-                                    <span *elseif="column.formatter == 'status'" (click)="column.onClick && column.onClick(record, index)" class="status {{ Object.get(record, column.key) + ' ' + (column.className || '') }}" [trans]="Object.get(record, column.key, column.default)"></span>
-                                    <span *elseif="column.formatter == 'boolean'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [trans]="Object.get(record, column.key, column.default) ? 'yes' : 'no'"></span>
-                                    <span *elseif="column.formatter == 'number'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [html]="Number(Object.get(record, column.key, column.default)).format()"></span>
-                                    <button *elseif="column.formatter == 'button'" (click)="column.onClick(record, index)" class="btn btn-primary bold {{ column.className }}" [html]="Object.get(record, column.key, column.default)"></button>
-                                    <span *elseif="column.formatter == 'translator'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [trans]="Object.get(record, column.key, column.default)"></span>
-                                    <span *elseif="column.formatter == 'multiLingual'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [html]="Object.get(record, column.key + '.' + CURRENT_LOCALE, column.default)"></span>
-                                    <span *else [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [html]="this.column(column, record, index)"></span>
-                                </td>
-                                <td *if="this.options.table.actions">
-                                    <content *pass="{record, index}"></content>
-                                    <table-actions *else></table-actions>
+                        </thead>
+                        <tbody>
+                            <tr *if="this.isLoading">
+                                <td class="text-center" colspan="{{ this.options.table.colspan() }}">
+                                    <!-- <flk-spinner></flk-spinner> -->
+                                    <!-- <fa spin="spinner" 4x></fa> -->
+                                    <div class="table-loading">
+                                        <div class="spinner"></div> 
+                                    </div>                                    
                                 </td>
                             </tr>
-                        </else>
-                    </tbody>
-                    <table-pagination></table-pagination>
-                </table>
+                            <else>
+                                <tr *if="Is.empty(this.records)">
+                                    <td class="text-center" colspan="{{ this.options.table.colspan() }}" trans="noRecords"></td>
+                                </tr>
+                                <tr *else *for="let record, index of this.records" *key="record.id">
+                                    <td *for="let column of this.options.table.columns" *key="column.heading">
+                                        <a *if="column.formatter == 'email'" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="'mailto:' + Object.get(record, column.key)" [html]="Object.get(record, column.key)"></a>
+                                        <a *elseif="column.formatter == 'link'" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="column.href(record)" target="{{column.target || 'self'}}" [html]="column.text ? column.text(record, index) : Object.get(record, column.key, column.default)"></a>
+                                        <a *elseif="column.formatter == 'imageLink' && Object.get(record, column.key)" class="{{ column.className }}" (click)="column.onClick && column.onClick(record, index)" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [href]="column.href(record)" target="{{column.target || 'self'}}">
+                                            <img class="image" class="img-rounded" [src]="Object.get(record, column.key)" />
+                                        </a>
+                                        <flk-time-ago *elseif="column.formatter == 'humanTime'" class="{{ column.className }}" [timestamp]="Object.get(record, column.key)"></flk-time-ago>                                                                        
+                                        <img *elseif="column.formatter == 'image' && Object.get(record, column.key)" (click)="column.onClick && column.onClick(record, index)" class="image img-rounded" [src]="Object.get(record, column.key)" />
+                                        <span *elseif="column.formatter == 'status'" (click)="column.onClick && column.onClick(record, index)" class="status {{ Object.get(record, column.key) + ' ' + (column.className || '') }}" [trans]="Object.get(record, column.key)"></span>
+                                        <div *elseif="column.formatter == 'boolean'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [trans]="Object.get(record, column.key) ? 'yes' : 'no'"></div>
+                                        <div *elseif="column.formatter == 'number'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [html]="Number(Object.get(record, column.key)).format()"></div>
+                                        <button *elseif="column.formatter == 'button'" (click)="column.onClick(record, index)" class="btn btn-primary bold {{ column.className }}" [html]="Object.get(record, column.key)"></button>
+                                        <div *elseif="column.formatter == 'multiLingual'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" [html]="Object.get(record, column.key + '.' + CURRENT_LOCALE)"></div>
+                                        <div *elseif="column.formatter == 'translator'" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [trans]="Object.get(record, column.key)"></div>
+                                        <div *else [tooltip]="column.tooltip" [title]="column.tooltip ? column.tooltip(record) : null" (click)="column.onClick && column.onClick(record, index)" class="{{ column.className }}" [html]="this.column(column, record)"></div>
+                                    </td>
+                                    <td *if="this.options.table.actions">
+                                        <content>
+                                            <table-actions></table-actions>                                         
+                                        </content>                                    
+                                    </td>
+                                </tr>
+                            </else>
+                        </tbody>
+                        <table-pagination></table-pagination>
+                    </table>
+                </div>
             </div>
         </div>
 

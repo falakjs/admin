@@ -1,4 +1,4 @@
-<aside *as="element">
+<aside *as="element" [class]="{closed: this.inputs.parent.isExpanded}">
     <div id="sidebar-overlay" (click)="this.toggle()"></div>
     <button type="button" id="sidebar-close-btn" (click)="this.toggle()" title="close">
         <fa icon="times"></fa>
@@ -10,8 +10,9 @@
             <span class="name" [html]="this.user.name"></span>
             <fa icon="circle online"></fa>
         </section>
+        <input type="text" (input)="this.filter($el.value)" placeholder="search" [value]="this.keywords" class="sidebar-filter-input" />
         <ul id="sidebar-tree">
-            <li *for="let link of this.links" class="item" [class]="{'tree-parent': link.group}">
+            <li *for="let link of this.displayedLinks" class="item" [class]="{'tree-parent': link.group}">
                 <a *if="! link.group" [href]="link.route" [class]="{active: link.route == this.currentRoute}">
                     <fa [icon]="link.icon"></fa>
                     <span [trans]="link.text"></span>

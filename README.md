@@ -55,7 +55,7 @@ class reportsPage {
         this.bulkService = bulkService;
     }
 
-    await init() {
+    async init() {
         let {users, posts, categories} = await this.bulkService.list({
             users: true,
             posts: true,

@@ -57,12 +57,12 @@
 
             &.search-item {
                 input {
-                    background: #FFF;
-                    border: 1px solid #f1f1f1;
+                    background: #FFF !important;
+                    border: 2px solid #f1f1f1;
 
                     &:focus {
                         outline: none;
-                        border: 2px solid skyblue;
+                        border: 2px solid skyblue !important;
                     }
                 }
             }

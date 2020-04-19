@@ -4,9 +4,13 @@ body {
         padding: 1rem;
     }
 
-    &.desktop {
+    &.desktop, &.tablet {
         main {
             padding-#{$left}: #{$sidebar-width};
+            transition: 0.5s padding ease-in-out;
+            &.expanded {
+                padding-#{$left}: 0;
+            }
         }
     }
 

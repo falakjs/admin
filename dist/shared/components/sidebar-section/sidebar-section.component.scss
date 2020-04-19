@@ -3,10 +3,11 @@
 
 
 body {
-    &.desktop {
+    &.desktop, &.tablet {
         aside {
+            transition: all 0.5s ease-in-out;
             width: $sidebar-width;
-            display: block !important;     
+            display: block;     
 
             #sidebar-close-btn {
                 display: none;
@@ -24,6 +25,21 @@ aside {
     overflow: auto;
     box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
     background: $sidebar-background-color;
+
+    &.closed {
+        #{$left}: -#{$sidebar-width};
+    }
+
+    .sidebar-filter-input {
+        width: 90%;
+        border-radius: 5px;
+        background: $sidebar-sub-menu-background-color; 
+        border: none;
+        margin: auto;
+        display: block;
+        padding: 0.5rem;
+        color: #FFF;
+    }
 
     @include responsive((
         0: (
@@ -72,6 +88,10 @@ aside {
         font-size: 3rem;
         color: #ddd;
         cursor: pointer;
+<<<<<<< HEAD
+        z-index: 10000;
+=======
+>>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
     }
 
     a {
@@ -87,6 +107,10 @@ aside {
 
         &.active,
         &:hover {
+<<<<<<< HEAD
+            background: $sidebar-active-link-background !important;
+=======
+>>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
             color: $sidebar-active-link-color !important;
         }
     }
@@ -123,6 +147,13 @@ aside {
                     background: $sidebar-sub-menu-background-color;
                     display: none;
 
+<<<<<<< HEAD
+                    a.active, a:hover {
+                        background: $sidebar-sub-menu-active-link-background !important;
+                    }
+
+=======
+>>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
                     &.opened {
                         display: block;
                     }

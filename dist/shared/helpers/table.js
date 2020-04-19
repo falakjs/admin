@@ -7,13 +7,52 @@ class Table {
 
         this.bulkLoads = null;
 
+        this.listMethod = 'list';
+    }
+
+    /**
+     * Initialize the component
+     * This method is triggered before rendering the component
+     */
+    async init() {
+        this.isLoading = true;
+
         this.defaultOptions = {
             permissionsKey: null,
             singleName: null,
             addable: true,
             table: {    
+                buttons: [
+                    {
+                        icon: 'edit',
+                        className: 'btn btn-info btn-circle btn-sm waves-effect waves-light',
+                        tooltip: (record, index) => {
+                            return trans('editItem', trans(this.options.singleName));
+                        },
+                        onClick: (record, index) => {
+                            this.openModal('edit', record, index);
+                        },
+                        permission: (record, index) => {
+                            return this.can('update', record, index);
+                        },
+                    },
+                    {
+                        icon: 'trash',
+                        className: 'btn btn-danger btn-circle btn-sm waves-effect waves-light',
+                        tooltip: (record, index) => {
+                            return trans('deleteItem', trans(this.options.singleName));
+                        },
+                        onClick: (record, index, adminLayout) => {
+                            echo(adminLayout)
+                            adminLayout.confirmDelete(record, index);
+                        },
+                        permission: (record, index) => {
+                            return this.can('delete', record, index);
+                        },
+                    },
+                ],
                 filter: {                    
-                    request: this.service.list.bind(this.service),
+                    request: this.service[this.listMethod].bind(this.service),
                     response: this.onFilterResponse.bind(this),
                 },
                 heading: 'table main heading',
@@ -44,15 +83,6 @@ class Table {
             },
         };
 
-    }
-
-    /**
-     * Initialize the component
-     * This method is triggered before rendering the component
-     */
-    async init() {
-        this.isLoading = true;
-
         if (! this.can('list')) {
             return this.router.navigateTo('/access-denied');
         }
@@ -63,7 +93,10 @@ class Table {
 
         this.options = Object.merge(this.defaultOptions, this.options);
 
-        let { records, paginationInfo } = await this.service.list(this.listOptions());
+        this.tableButtons = Object.get(this.options, 'table.buttons', [])
+                            .concat(Object.get(this.options, 'table.extendButtons', []));
+
+        let { records, paginationInfo } = await this.service[this.listMethod](this.listOptions());
 
         this.records = records;
         this.paginationInfo = paginationInfo;
@@ -76,6 +109,8 @@ class Table {
     loadBulks() {
         if (!this.bulkLoads) return;
 
+        this.bulkMethod = 'list';
+
         if (!this.loaded) {
             this.loaded = {};
             this.queryParams = {};
@@ -86,7 +121,7 @@ class Table {
             }
         }
 
-        this.bulkService.list(this.queryParams).then(response => {
+        this.bulkService[this.bulkMethod](this.queryParams).then(response => {
             let loaded = {};
 
             for (let value of this.bulkLoads) {
@@ -109,7 +144,6 @@ class Table {
                 });
             })
         };
-
     }
 
     onFilterResponse(response) {
@@ -154,5 +188,8 @@ class Table {
         this.records = Array.reset(this.records);
 
         this.service.delete(record.id);
+
+        this.paginationInfo.totalRecords--;
+        this.paginationInfo.currentResults--;
     }
 }

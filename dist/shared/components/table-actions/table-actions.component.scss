@@ -1,3 +1,19 @@
-#table-actions {
+.table-actions {
     // Picasso is ready to draw :)
+    position: relative;
+
+    .controlling-btns {
+        position: absolute;
+        z-index: 10;
+        overflow: hidden;
+        transition: all 0.25s ease-in;
+        transform: scaleY(0);
+        transform-origin: 100% 0;
+
+        &.opened {
+            overflow: auto;
+            transform: scaleY(1);
+            transition: all 0.5s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+        }
+    }
 }

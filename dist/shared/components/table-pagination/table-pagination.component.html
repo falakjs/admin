@@ -1,24 +1,25 @@
-<tfoot *if="this.parent.paginationInfo && ! this.parent.isLoading && this.parent.paginationInfo.currentResults > 0" class="table-pagination">
+<tfoot *if="this.parent.paginationInfo && ! this.parent.isLoading && this.parent.paginationInfo.currentResults > 0"
+    class="table-pagination">
     <tr>
         <td colspan="{{ this.options.table.colspan() - 2 }}" class="pagination-column">
-            <nav>
-                <ul class="pagination pg-blue p-0">
-                    <li *if="this.currentPage > 1" class="page-item">
-                        <button type="button" (click)="this.goToPage(this.currentPage - 1)" class="page-link" trans="prev"></button>
+            <ul class="pagination">
+                <li *if="this.currentPage > 1" class="page-item">
+                    <button type="button" (click)="this.goToPage(this.currentPage - 1)" class="page-link"
+                        trans="prev"></button>
+                </li>
+                <for loop="let i = 1; i <= this.parent.paginationInfo.numberOfPages; i++">
+                    <li class="page-item" [class]="{active: i == this.currentPage}">
+                        <button type="button" (click)="this.goToPage(i)" class="page-link" [html]="i"></button>
                     </li>
-                    <for loop="let i = 1; i <= this.parent.paginationInfo.numberOfPages; i++">
-                        <li class="page-item" [class]="{active: i == this.currentPage}">
-                            <button type="button" (click)="this.goToPage(i)" class="page-link" [html]="i"></button>
-                        </li>
-                    </for>
-                    <li *if="this.currentPage < this.parent.paginationInfo.numberOfPages" class="page-item">
-                        <button type="button" (click)="this.goToPage(this.currentPage + 1)" class="page-link" trans="next"></button>
-                    </li>
-                </ul>
-            </nav>
+                </for>
+                <li *if="this.currentPage < this.parent.paginationInfo.numberOfPages" class="page-item">
+                    <button type="button" (click)="this.goToPage(this.currentPage + 1)" class="page-link"
+                        trans="next"></button>
+                </li>
+            </ul>
         </td>
         <td colspan="2" class="bold">
-            {{ trans('displayingPaginationItems', this.parent.paginationInfo.currentResults, this.parent.paginationInfo.totalRecords.format()) }}            
+            {{ trans('displayingPaginationItems', this.parent.paginationInfo.currentResults, this.parent.paginationInfo.totalRecords.format()) }}
         </td>
     </tr>
 </tfoot>

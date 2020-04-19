@@ -1,18 +1,19 @@
-<button 
-    *if="this.parent.can('update', record, index)"
-    class="btn btn-info btn-circle btn-sm waves-effect waves-light" 
-    tooltip
-    title="{{ trans('editItem', trans(this.options.singleName)) }}"
-    (click)="this.parent.openModal('edit', record, index)"
-    >
-    <fa icon="edit" 2x></fa>
-</button>
-<button 
-    *if="this.parent.can('delete', record, index)"
-    class="btn btn-danger btn-circle btn-sm waves-effect waves-light" 
-    tooltip
-    title="{{ trans('deleteItem', trans(this.options.singleName)) }}"
-    (click)="this.confirmDelete(record, index)"
-    >
-    <fa icon="trash" 2x></fa>
-</button>
+<div class="table-actions">
+    <button class="btn btn-sm btn-circle" tooltip title="actions" (click)="record.openControl = !!! record.openControl; this.currentRecord = record; this.currentIndex = index">
+        <fa icon="ellipsis-h" 2x></fa>
+    </button>
+    <div [class]="{opened: record.openControl}" class="controlling-btns">
+        <for loop="let btn of this.inputs.parent.tableButtons" *key="btn">    
+            <button 
+                *if="btn.permission(record, index)" 
+                class="{{ btn.className }}"
+                type="button"
+                [tooltip]="btn.tooltip"
+                [title]="btn.tooltip(record, index)"
+                (click)="btn.onClick && btn.onClick(record, index, this)"
+            >
+            <fa [icon]="btn.icon"></fa>
+            </button>
+        </for>
+    </div>
+</div>

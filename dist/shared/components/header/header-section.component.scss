@@ -27,14 +27,15 @@ header {
     
     #header-sidebar-toggle-btn {
         vertical-align: middle;
+        display: inline-block;
 
-        @include responsive((
-            0: (
-                display: inline-block,
-            ),
-            $tablet-width: (
-                display: none,
-            ),
-        ));
+        // @include responsive((
+        //     0: (
+        //         display: inline-block,
+        //     ),
+        //     $tablet-width: (
+        //         display: none,
+        //     ),
+        // ));
     }
 }

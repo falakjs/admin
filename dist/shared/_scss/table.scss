@@ -11,3 +11,17 @@
         }
     }
 }
+
+
+.table-responsive { 
+    overflow-y: auto; 
+    max-height: 80vh; 
+}
+
+.table-responsive thead th { 
+    position: sticky; 
+    top: -1px; 
+    background: #FFF;    
+    z-index: 100;
+    box-shadow: inset 1px 1px #eee, 0 1px #eee;
+}

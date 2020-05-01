@@ -88,10 +88,7 @@ aside {
         font-size: 3rem;
         color: #ddd;
         cursor: pointer;
-<<<<<<< HEAD
         z-index: 10000;
-=======
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
     }
 
     a {
@@ -107,10 +104,7 @@ aside {
 
         &.active,
         &:hover {
-<<<<<<< HEAD
             background: $sidebar-active-link-background !important;
-=======
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
             color: $sidebar-active-link-color !important;
         }
     }
@@ -147,13 +141,10 @@ aside {
                     background: $sidebar-sub-menu-background-color;
                     display: none;
 
-<<<<<<< HEAD
                     a.active, a:hover {
                         background: $sidebar-sub-menu-active-link-background !important;
                     }
 
-=======
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
                     &.opened {
                         display: block;
                     }

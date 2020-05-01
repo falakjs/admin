@@ -43,16 +43,9 @@ class AdminTable {
         this.tableIsLoading = true;
         let response = await this.options.table.filter.request(form);
 
-<<<<<<< HEAD
         this.isFiltering = false;
         this.tableIsLoading = false;
         this.options.table.filter.response(response);
-=======
-        this.options.table.filter.response(response);
-
-        this.isFiltering = false;
-        this.tableIsLoading = false;
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
     }
 
     async goToPage(pageNumber) {
@@ -62,20 +55,11 @@ class AdminTable {
             this.pageInput.value = pageNumber;
         }
 
-<<<<<<< HEAD
-        if (!form) {
-=======
         if (! form) {
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
             form = {
                 page: pageNumber,
             };
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
         // this.parent.isLoading = true;
         this.isFiltering = true;
 
@@ -87,12 +71,7 @@ class AdminTable {
 
         this.tableIsLoading = false;
         this.isFiltering = false;
-<<<<<<< HEAD
-        this.parent.isLoading = false;
-
-=======
         this.parent.isLoading = false;    
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
         scrollTop();
     }
 

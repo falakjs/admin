@@ -54,16 +54,11 @@
         margin-#{$right}: 2rem;
 
         .icon {
-<<<<<<< HEAD
             margin-#{$right}: 0rem;
-=======
-            margin-#{$right}: 1rem;
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
         }
     }
 
     table {
-<<<<<<< HEAD
         // border-collapse: collapse; 
                 border-collapse:separate; 
                 border-spacing: 0 0.4rem; 
@@ -78,15 +73,11 @@
         }
         th {
             // text-align: center;
-=======
-        th {
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
             font-weight: bold;
         }
 
         td {
             vertical-align: middle;
-<<<<<<< HEAD
             padding: 0 0.5rem;
             font-size: 0.8rem;
             height: 35px;
@@ -99,12 +90,6 @@
                 border-radius: 8px;
                 padding: 0.3rem 0.5rem;
                 font-size: 0.8rem;
-=======
-
-            a {
-                font-weight: bold;
-                color: skyblue;
->>>>>>> 1c2ca9a477d660befdb693a3034a9e879e0750be
             }
 
             .image {
